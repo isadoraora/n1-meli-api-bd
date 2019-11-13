@@ -9,3 +9,7 @@ const AlunasSchema = new mongoose.Schema({
         leu: String,
     }]
 })
+
+//abaixo estamos falando pro mongoose que temos esse model e ele contêm as infos abaixo.
+const Alunas = mongoose.model('Alunas', AlunasSchema);
+module.exports = Alunas; 
