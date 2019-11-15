@@ -8,6 +8,8 @@ const AlunasSchema = new mongoose.Schema({
         titulo: String,
         leu: String,
     }]
+}, {
+    versionKey: false
 })
 
 //abaixo estamos falando pro mongoose que temos esse model e ele contêm as infos abaixo.
