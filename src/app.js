@@ -1,4 +1,6 @@
 const express = require("express")
+const mongoose = require("mongoose")
+
 const app = express()
 const mongoose = require('mongoose')
 const bodyParser = require('body-parser')
@@ -8,6 +10,23 @@ let db = mongoose.connection;
 db.on('error', console.log.bind(console, 'connection error: '))
 db.once('open', function () {
   console.log('conexão feita com sucesso.')
+})
+
+//String de conexão com o mongodb
+//porta padrão do mongo: 27017
+//banco de dados utilizado: reprograma
+
+mongoose.connect("mongodb://localhost:27017/reprograma",  { useNewUrlParser: true });
+
+//representação da conexão com o banco de dados 
+let db = mongoose.connection;
+
+//após a conexão, caso ocorra algum erro, será logado o erro
+db.on("error", console.log.bind(console, "connection error:"))
+
+//uma vez que a conexão esteja aberta, será exebida essa mensagem
+db.once("open", function (){
+  console.log("conexão feita com sucesso.")
 })
 
 //rotas
