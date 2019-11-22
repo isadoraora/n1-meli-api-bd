@@ -156,3 +156,33 @@ exports.postBooks = (req, res) => {
     //   res.status(201).send(alunas[aluna.id - 1].livros);
   )
 }
+exports.update = (req, res) => {
+  Alunas.update(
+    { _id: req.params.id },
+    { $set: req.body },
+    { upsert: true },
+    function (err) {
+      if (err) return res.status(500).send({ message: err });
+      res.status(200).send({ message: "Atualizado com sucesso!" });
+    })
+}
+
+exports.deletarAluna = (req, res) => {
+  const idAluna = req.params.id;
+
+  Alunas.findById(idAluna, function (err, aluna) {
+    if (err) return res.status(500).send(err);
+
+    if (!aluna) {
+      return res.status(200).send({ message: `Infelizmente não localizamos a aluna de id: ${req.params.id}` });
+    }
+
+    aluna.remove(function (err) {
+      if (!err) {
+        res.status(200).send({ message: 'Aluna removida com sucesso...' });
+      }
+    })
+
+
+  })
+}
